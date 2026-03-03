@@ -1,59 +1,22 @@
-import { useRef, useEffect } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Section } from "@/components/Section";
 import { SectionTitle } from "@/components/SectionTitle";
 import { AnimatedText } from "@/hooks/animations";
-import { Button } from "@/components/Button";
 import { useI18n } from "@/providers/I18nProvider";
 import { formulesData, Images } from "@/lib/constants";
 import { cn } from "@/lib/utils";
-
-gsap.registerPlugin(ScrollTrigger);
 
 interface FormulesProps {
   onSelectFormula?: (id: number) => void;
 }
 
 export function Formules({ onSelectFormula }: FormulesProps) {
-  const sectionRef = useRef<HTMLDivElement>(null);
   const { t, locale } = useI18n();
   const currentLocale = locale as "fr" | "en";
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const words = sectionRef.current?.querySelectorAll(
-        ".formula-reveal-word",
-      );
-      if (words?.length) gsap.set(words, { y: "100%", opacity: 0 });
-      const cards = sectionRef.current?.querySelectorAll(
-        ".formula-card-entrance",
-      );
-      if (!words?.length || !cards?.length) return;
-      const tl = gsap.timeline({
-        scrollTrigger: { trigger: sectionRef.current, start: "top 80%" },
-      });
-      tl.to(words, {
-        y: "0%",
-        opacity: 1,
-        duration: 0.8,
-        stagger: 0.02,
-        ease: "expo.out",
-      }).fromTo(
-        cards,
-        { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.5, stagger: 0.15, ease: "power4.out" },
-        "-=0.6",
-      );
-    }, sectionRef);
-    return () => ctx.revert();
-  }, [locale]);
 
   return (
     <Section bgImage={Images.Hero_Bg}>
       <section
         id="formulas"
-        ref={sectionRef}
         className="relative overflow-hidden px-6 py-24 md:px-12 lg:px-24 lg:py-32"
       >
         <div className="mx-auto max-w-[1400px]">
@@ -115,7 +78,7 @@ function PackageCard({
   return (
     <div
       className={cn(
-        "formula-card-entrance opacity-0 will-change-transform relative flex w-full flex-col border p-8 backdrop-blur-lg transition-all duration-500 bg-[#0a1a2f]/40 group",
+        "formula-card-entrance will-change-transform relative flex w-full flex-col border p-8 backdrop-blur-lg transition-all duration-500 bg-[#0a1a2f]/40 group",
         popular
           ? "border-brand-yellow md:-translate-y-6 md:scale-105 z-20 shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
           : "border-white/10",

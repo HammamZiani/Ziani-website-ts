@@ -1,4 +1,4 @@
-import { useEffect, useCallback, useState, useRef } from "react";
+import { useEffect, useCallback, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -11,7 +11,6 @@ import { servicesData } from "@/lib/constants";
 gsap.registerPlugin(ScrollTrigger);
 
 export function Services() {
-  const sectionRef = useRef<HTMLDivElement>(null);
   const { t, locale } = useI18n();
   const currentLocale = locale as "fr" | "en";
 
@@ -29,43 +28,10 @@ export function Services() {
     onSelect();
   }, [emblaApi, onSelect]);
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const words = sectionRef.current?.querySelectorAll(
-        ".service-reveal-word",
-      );
-      if (words?.length) gsap.set(words, { y: "100%", opacity: 0 });
-      const cards = sectionRef.current?.querySelectorAll(".service-card-mask");
-      if (!words || !cards || words.length === 0) return;
-      const tl = gsap.timeline({
-        scrollTrigger: { trigger: sectionRef.current, start: "top 75%" },
-      });
-      tl.to(words, {
-        y: "0%",
-        opacity: 1,
-        duration: 1,
-        stagger: 0.02,
-        ease: "expo.out",
-      }).fromTo(
-        cards,
-        { clipPath: "inset(100% 0 0 0)" },
-        {
-          clipPath: "inset(0% 0 0 0)",
-          duration: 1.5,
-          stagger: 0.1,
-          ease: "expo.inOut",
-        },
-        "-=0.8",
-      );
-    }, sectionRef);
-    return () => ctx.revert();
-  }, [locale]);
-
   return (
     <SectionLight>
       <section
         id="services"
-        ref={sectionRef}
         className="relative z-30 w-full  py-20  overflow-hidden "
       >
         <div className="flex flex-col gap-16 lg:flex-row lg:items-center">

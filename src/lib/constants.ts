@@ -77,6 +77,30 @@ export const servicesData = [
 export const formulesData = [
   {
     id: 2,
+    color: "#15803d",
+    name: { fr: "Package Algues", en: "Algae Package" },
+    descriptions: {
+      fr: [
+        "Entrée + Gommage",
+        "Savonnage",
+        "30 minutes de massage relaxant",
+        "Algothérapie + Spécial dos",
+        "Sortie de bain",
+        "Nécessaire de toilette",
+      ],
+      en: [
+        "Entry + Exfoliation",
+        "Soaping",
+        "30 minutes relaxing massage",
+        "Algae therapy + Special back",
+        "Bath exit",
+        "Toiletries",
+      ],
+    },
+    price: 350,
+  },
+  {
+    id: 3,
     color: "#92400e",
     name: { fr: "Package Chocolat", en: "Chocolate Package" },
     descriptions: {
@@ -100,7 +124,7 @@ export const formulesData = [
     price: 400,
   },
   {
-    id: 3,
+    id: 1,
     color: "#ca8a04",
     name: { fr: "Package Premium", en: "Premium Package" },
     descriptions: {
@@ -125,30 +149,6 @@ export const formulesData = [
     },
     price: 500,
     isPopular: true,
-  },
-  {
-    id: 1,
-    color: "#15803d",
-    name: { fr: "Package Algues", en: "Algae Package" },
-    descriptions: {
-      fr: [
-        "Entrée + Gommage",
-        "Savonnage",
-        "30 minutes de massage relaxant",
-        "Algothérapie + Spécial dos",
-        "Sortie de bain",
-        "Nécessaire de toilette",
-      ],
-      en: [
-        "Entry + Exfoliation",
-        "Soaping",
-        "30 minutes relaxing massage",
-        "Algae therapy + Special back",
-        "Bath exit",
-        "Toiletries",
-      ],
-    },
-    price: 350,
   },
 ] as any;
 

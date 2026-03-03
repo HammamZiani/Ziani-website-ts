@@ -1,68 +1,18 @@
-import { useMemo, useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { SectionLight } from "@/components/Section";
+import { useMemo } from "react";
+
 import { SectionTitle } from "@/components/SectionTitle";
 import { AnimatedText } from "@/hooks/animations";
 import { useI18n } from "@/providers/I18nProvider";
 import { Images } from "@/lib/constants";
-import { cn } from "@/lib/utils";
-
-gsap.registerPlugin(ScrollTrigger);
 
 export function BeautyCenter() {
-  const sectionRef = useRef<HTMLDivElement>(null);
   const { locale, t } = useI18n();
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const words = sectionRef.current?.querySelectorAll(".beauty-reveal-word");
-      if (words?.length) gsap.set(words, { y: "100%", opacity: 0 });
-      const imageWrap = sectionRef.current?.querySelector(".beauty-image-wrap");
-      const imageInner = sectionRef.current?.querySelector(
-        ".beauty-image-inner",
-      );
-      const uiElements =
-        sectionRef.current?.querySelectorAll(".beauty-ui-fade");
-      if (!words || !imageWrap || !imageInner || !uiElements) return;
-      const tl = gsap.timeline({
-        scrollTrigger: { trigger: sectionRef.current, start: "top 75%" },
-      });
-      tl.to(words, {
-        y: "0%",
-        opacity: 1,
-        duration: 1,
-        stagger: 0.015,
-        ease: "expo.out",
-      })
-        .fromTo(
-          imageWrap,
-          { clipPath: "inset(0 0 100% 0)" },
-          { clipPath: "inset(0 0 0% 0)", duration: 1.6, ease: "expo.inOut" },
-          "-=1.2",
-        )
-        .fromTo(
-          imageInner,
-          { scale: 1.2 },
-          { scale: 1, duration: 2, ease: "expo.out" },
-          "-=1.4",
-        )
-        .fromTo(
-          uiElements,
-          { y: 20, opacity: 0 },
-          { y: 0, opacity: 1, duration: 1, stagger: 0.1, ease: "power3.out" },
-          "-=1.0",
-        );
-    }, sectionRef);
-    return () => ctx.revert();
-  }, [locale]);
 
   const services = useMemo(() => t("Beauty.tags" as any).split(","), [t]);
 
   return (
     <section
       id="salon"
-      ref={sectionRef}
       className="relative z-30 bg-[#E5E5DD] px-6 py-20 md:px-12 md:py-28 lg:px-24 lg:py-40 overflow-hidden"
     >
       <div className="absolute inset-0 hidden sm:block">

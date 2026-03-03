@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useI18n } from "@/providers/I18nProvider";
@@ -32,10 +32,7 @@ function StepIndicator({ step }: { step: number }) {
 }
 
 export function Booking({ isLoaded, selectedFormulaId }: BookingProps) {
-  const { locale, t } = useI18n();
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const leftSideRef = useRef<HTMLDivElement>(null);
-  const rightSideRef = useRef<HTMLDivElement>(null);
+  const { t } = useI18n();
 
   const [step, setStep] = useState(1);
   const [selectedFormula, setSelectedFormula] = useState<
@@ -62,45 +59,8 @@ export function Booking({ isLoaded, selectedFormulaId }: BookingProps) {
     }
   }, [selectedFormulaId]);
 
-  useEffect(() => {
-    if (!sectionRef.current || !leftSideRef.current || !rightSideRef.current)
-      return;
-    const ctx = gsap.context(() => {
-      const words = sectionRef.current?.querySelectorAll(
-        ".booking-reveal-word",
-      );
-      if (words?.length) gsap.set(words, { y: "100%", opacity: 0 });
-      gsap.set([leftSideRef.current, rightSideRef.current], {
-        clipPath: "inset(100% 0% 0% 0%)",
-      });
-      gsap
-        .timeline({
-          scrollTrigger: { trigger: sectionRef.current, start: "top 70%" },
-        })
-        .to(words, {
-          y: "0%",
-          opacity: 1,
-          duration: 0.8,
-          stagger: 0.02,
-          ease: "expo.out",
-        })
-        .to(
-          [leftSideRef.current, rightSideRef.current],
-          {
-            clipPath: "inset(0% 0% 0% 0%)",
-            duration: 1.4,
-            ease: "expo.inOut",
-            stagger: 0.1,
-          },
-          "-=0.6",
-        );
-    }, sectionRef);
-    return () => ctx.revert();
-  }, [locale]);
-
   return (
     <section
-      ref={sectionRef}
       id="booking"
       className="relative z-30 min-h-screen bg-[#E5E5DD] overflow-hidden"
     >
@@ -120,10 +80,7 @@ export function Booking({ isLoaded, selectedFormulaId }: BookingProps) {
       </div>
 
       <div className="grid lg:grid-cols-[0.7fr_1.3fr] min-h-screen">
-        <div
-          ref={leftSideRef}
-          className="relative h-[25vh] lg:h-full overflow-hidden"
-        >
+        <div className="relative h-[25vh] lg:h-full overflow-hidden">
           <img
             src={Images.Booking_Left}
             alt="Hammam"
@@ -146,10 +103,7 @@ export function Booking({ isLoaded, selectedFormulaId }: BookingProps) {
           </div>
         </div>
 
-        <div
-          ref={rightSideRef}
-          className="flex flex-col px-6 py-8 lg:px-20 lg:justify-center bg-transparent min-h-full"
-        >
+        <div className="flex flex-col px-6 py-8 lg:px-20 lg:justify-center bg-transparent min-h-full">
           <div className="max-w-2xl w-full mx-auto">
             <StepIndicator step={step} />
             {step === 1 && (

@@ -17,7 +17,7 @@ export function AnimatedText({ text, className, wordClass = "reveal-word" }: Ani
     <>
       {text.split(" ").map((word, i) => (
         <span key={`${word}-${i}`} className={`inline-flex overflow-hidden pb-1 mr-[0.3em] ${className ?? ""}`}>
-          <span className={`${wordClass} inline-block`} style={{ transform: "translateY(100%)", opacity: 0 }}>
+          <span className={`${wordClass} inline-block`}>
             {word}
           </span>
         </span>

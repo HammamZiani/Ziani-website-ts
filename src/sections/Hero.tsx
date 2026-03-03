@@ -1,5 +1,3 @@
-import { useRef, useEffect, useCallback } from "react";
-import gsap from "gsap";
 import { Section } from "@/components/Section";
 import { AnimatedText } from "@/hooks/animations";
 import { Certificate } from "@/components/Certificate";
@@ -12,78 +10,7 @@ interface HeroProps {
 }
 
 export function Hero({ isLoaded }: HeroProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const hasAnimatedRef = useRef(false);
-  const { locale, t } = useI18n();
-
-  const animateHero = useCallback((animateCertificates = true) => {
-    if (!containerRef.current) return;
-
-    const ctx = gsap.context(() => {
-      const words = containerRef.current?.querySelectorAll(".reveal-word");
-      const heroImage = containerRef.current?.querySelector(".hero-image");
-      const certificates =
-        containerRef.current?.querySelector(".hero-certificates");
-
-      if (!words?.length || !heroImage) return;
-
-      gsap.set(words, { y: "100%", opacity: 0 });
-      gsap.set(heroImage, { visibility: "visible" });
-
-      const tl = gsap.timeline({ delay: 0.15 });
-
-      tl.to(words, {
-        y: "0%",
-        opacity: 1,
-        duration: 1.1,
-        stagger: 0.02,
-        ease: "expo.out",
-      });
-
-      if (animateCertificates) {
-        gsap.set(certificates, { clipPath: "inset(100% 0 0 0)" });
-        tl.to(
-          certificates,
-          {
-            clipPath: "inset(0% 0 0 0)",
-            duration: 1,
-            ease: "expo.inOut",
-          },
-          "-=0.5",
-        );
-      }
-
-      tl.fromTo(
-        heroImage,
-        { clipPath: "inset(0 100% 0 0)", scale: 1.08 },
-        {
-          clipPath: "inset(0 0% 0 0)",
-          scale: 1,
-          duration: 1.6,
-          opacity: 1,
-          ease: "expo.inOut",
-        },
-        "-=1.2",
-      );
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
-
-  useEffect(() => {
-    if (!isLoaded) return;
-
-    if (!hasAnimatedRef.current) {
-      hasAnimatedRef.current = true;
-      const cleanup = animateHero(true);
-      return cleanup;
-    }
-
-    if (locale) {
-      const cleanup = animateHero(false);
-      return cleanup;
-    }
-  }, [isLoaded, locale, animateHero]);
+  const { t } = useI18n();
 
   const navItems = [
     { key: "Navigation.home", id: "home" },
@@ -100,7 +27,6 @@ export function Hero({ isLoaded }: HeroProps) {
     <Section bgImage={Images.Hero_Bg}>
       <section
         id="home"
-        ref={containerRef}
         className="relative flex min-h-screen w-full flex-col overflow-hidden"
       >
         <header className="absolute top-6 left-1/2 z-50 w-full max-w-400 -translate-x-1/2 px-6 lg:top-10 lg:px-12">
@@ -137,7 +63,7 @@ export function Hero({ isLoaded }: HeroProps) {
               <h1 className="font-primary text-4xl uppercase leading-[0.92] tracking-tighter text-white sm:text-5xl md:text-6xl lg:text-[4vw]">
                 <AnimatedText text={t("Hero.h1.part1")} />
                 <br />
-                <span className="italic font-light lowercase text-brand-yellow">
+                <span className="font-light text-brand-yellow">
                   <AnimatedText text={t("Hero.h1.part2")} />
                 </span>
                 <AnimatedText text={t("Hero.h1.part3")} />
@@ -149,7 +75,7 @@ export function Hero({ isLoaded }: HeroProps) {
           </div>
 
           <div className="flex items-center justify-center lg:col-start-2 lg:row-span-2 lg:justify-end">
-            <div className="relative aspect-4/5 w-full max-w-90 sm:max-w-120 md:max-w-137.5 lg:max-w-none lg:w-[92%] xl:w-[88%] hero-image opacity-0 invisible">
+            <div className="relative aspect-4/5 w-full max-w-90 sm:max-w-120 md:max-w-137.5 lg:max-w-none lg:w-[92%] xl:w-[88%]">
               <div className="relative h-full w-full overflow-hidden shadow-[0_50px_120px_rgba(0,0,0,0.85)]">
                 <img
                   src={Images.Hero_Right}
