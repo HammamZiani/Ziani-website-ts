@@ -50,7 +50,7 @@ function raf(time: number) {
 }
 
 export default function App() {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [selectedFormulaId, setSelectedFormulaId] = useState<number | null>(
     null,
   );
