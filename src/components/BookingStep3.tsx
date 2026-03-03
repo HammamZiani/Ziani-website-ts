@@ -40,7 +40,7 @@ export default function BookingStep3({ form, setForm, hasChildren, setHasChildre
 
   const handleEmail = () => {
     const { text, subject } = getBookingDetails()
-    window.location.href = `mailto:contact@hammamziani.ma?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text.replace(/\*/g, ""))}`
+    window.location.href = `mailto:hammamziani@yahoo.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text.replace(/\*/g, ""))}`
   }
 
   return (
