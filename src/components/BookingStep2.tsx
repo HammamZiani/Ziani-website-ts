@@ -93,7 +93,7 @@ export default function BookingStep2({
                 key={time}
                 onClick={() => setSelectedTime(time)}
                 className={cn(
-                  "py-3 text-[10px] border transition-all",
+                  "py-3 text-[10px] border transition-all cursor-pointer",
                   selectedTime === time
                     ? "bg-black text-white border-black"
                     : "border-black/10 text-black/40 hover:border-black hover:text-black",
