@@ -115,7 +115,7 @@ function PackageCard({
   return (
     <div
       className={cn(
-        "formula-card-entrance opacity-0 will-change-transform relative flex w-full flex-col border p-8 backdrop-blur-xl transition-all duration-500 bg-[#0a1a2f]/40 group",
+        "formula-card-entrance opacity-0 will-change-transform relative flex w-full flex-col border p-8 backdrop-blur-md transition-all duration-500 bg-[#0a1a2f]/40 group",
         popular
           ? "border-brand-yellow md:-translate-y-6 md:scale-105 z-20 shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
           : "border-white/10",

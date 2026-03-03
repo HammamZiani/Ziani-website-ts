@@ -24,7 +24,7 @@ export function Section({ children, className, bgImage }: SectionProps) {
   if (bgImage) {
     return (
       <section className={`relative min-h-screen bg-center bg-no-repeat bg-cover ${className ?? ""}`} style={{ backgroundImage: `url(${bgImage})` }}>
-        <div className="absolute inset-0 bg-black/30" />
+        <div className="absolute inset-0 bg-black/5" />
         <div className="relative z-10 text-white">{children}</div>
       </section>
     )

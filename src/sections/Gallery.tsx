@@ -35,7 +35,7 @@ export function Gallery() {
   return (
     <Section bgImage={Images.Hero_Bg}>
       <section id="gallery" ref={sectionRef} className="relative h-screen w-full overflow-hidden flex flex-col justify-center gap-20">
-        <div className="absolute inset-0 bg-black/20 backdrop-blur-[2px]" />
+        {/* <div className="absolute inset-0 bg-black/20 backdrop-blur-[2px]" /> */}
 
         <div className="z-20 text-center">
           <SectionTitle
