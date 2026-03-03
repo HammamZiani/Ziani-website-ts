@@ -161,7 +161,7 @@ export function Hero({ isLoaded }: HeroProps) {
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-4 lg:gap-10 lg:col-start-1 hero-certificates">
+          <div className="flex flex-wrap items-center justify-between md:justify-start gap-4 lg:gap-10 lg:col-start-1 hero-certificates">
             <Certificate
               topTitle="Excellence"
               bottomTitle="Tripadvisor"

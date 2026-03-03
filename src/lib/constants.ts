@@ -15,7 +15,7 @@ export const servicesData = [
   {
     id: 1,
     image: "/gommage.jpeg",
-    name: { fr: "Gommage", en: "Exfoliation" },
+    name: { fr: "Gommage", en: "Scrubbing" },
     description: {
       fr: "Un rituel purifiant qui révèle la beauté naturelle de votre peau.",
       en: "A purifying ritual that reveals the natural beauty of your skin.",
@@ -24,10 +24,10 @@ export const servicesData = [
   {
     id: 2,
     image: "/savonnage.png",
-    name: { fr: "Savonnage parfumé", en: "Scented Soap" },
+    name: { fr: "Savonnage parfumé", en: "Soaping" },
     description: {
-      fr: "Un bain de fraîcheur aromatique, pour une peau douce et delicately parfumée.",
-      en: "An aromatic freshness bath, for soft and delicately scented skin.",
+      fr: "Un bain de fraîcheur aromatique, pour une peau douce et délicatement parfumée.",
+      en: "An aromatic bath of freshness, for soft and delicately fragranced skin.",
     },
   },
   {
@@ -39,7 +39,7 @@ export const servicesData = [
     },
     description: {
       fr: "Une évasion sensorielle pour apaiser le corps et l'esprit.",
-      en: "A sensory escape to soothe body and mind.",
+      en: "A sensory escape to soothe the body and mind.",
     },
   },
   {
@@ -47,20 +47,20 @@ export const servicesData = [
     image: "/algue.jpg",
     name: {
       fr: "Enveloppement aux Algues - Spécial Dos",
-      en: "Algae Wrap - Special Back",
+      en: "Seaweed Therapy - special back",
     },
     description: {
-      fr: "Un rituel revitalisant qui apaise les douleurs du dos et stimule la circulation sanguine.",
-      en: "A revitalizing ritual that soothes back pain and stimulates blood circulation.",
+      fr: "Un rituel revitalisant qui apaise les douleurs du dos et stimule la circulation sanguine. Les bienfaits des algues marines nourrissent votre peau en profondeur, offrant une sensation apaisante et décontractante.",
+      en: "A revitalizing ritual that soothes back pain and stimulates blood circulation. The benefits of marine algae deeply nourish your skin, providing a soothing and relaxing sensation.",
     },
   },
   {
     id: 5,
     image: "/chocolate.jpeg",
-    name: { fr: "Enveloppement au chocolat", en: "Chocolate Wrap" },
+    name: { fr: "Enveloppement au chocolat", en: "Chocolate body wrap" },
     description: {
-      fr: "Un traitement indulgent qui allie plaisir gourmand et bienfaits hydratants.",
-      en: "An indulgent treatment that combines sweet pleasure with hydrating benefits.",
+      fr: "Un traitement indulgent qui allie plaisir gourmand et bienfaits hydratants, pour une peau irrésistiblement douce.",
+      en: "An indulgent treatment that combines gourmet pleasure with moisturizing benefits, for irresistibly soft skin.",
     },
   },
   {
@@ -68,8 +68,8 @@ export const servicesData = [
     image: "/masqueCorp.jpeg",
     name: { fr: "Masques corporels", en: "Body Masks" },
     description: {
-      fr: "Choisissez parmi notre large gamme de masques: café à l'orange, oud, fleur d'oranger, et bien plus encore.",
-      en: "Choose from our wide range of masks: orange coffee, oud, orange blossom, and more.",
+      fr: "Choisissez parmi notre large gamme de masques, comprenant des options exquises telles que café à l'orange, oud, fleur d'oranger, et bien plus encore. Chacun de nos masques est soigneusement élaboré pour revitaliser votre peau, la laissant nourrie, éclatante et délicatement parfumée.",
+      en: "Choose from our wide range of masks, including exquisite options such as orange coffee, oud, orange blossom, and many more. Each of our body masks is carefully crafted to revitalize your skin, leaving it nourished, radiant, and delicately fragranced.",
     },
   },
 ] as any;
