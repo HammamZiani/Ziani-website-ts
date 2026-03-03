@@ -137,7 +137,7 @@ function ServiceCard({
           className={`h-full w-full object-cover transition-all duration-[1.8s] ${active ? "scale-105 opacity-80" : "scale-100 opacity-40 grayscale"}`}
         />
         <div className="absolute inset-0 z-20 flex flex-col justify-between p-6 sm:p-8 md:p-10">
-          <div className="bg-linear-to-t from-black/90 to-transparent h-[50%] absolute bottom-0 left-0 w-full" />
+          <div className="bg-linear-to-t from-black/95 to-transparent h-[90%] absolute bottom-0 left-0 w-full" />
           <div className="flex items-start justify-between">
             <span className="font-primary text-4xl italic text-white/20 sm:text-5xl">
               0{service.id}
