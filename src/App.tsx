@@ -50,7 +50,7 @@ function raf(time: number) {
 }
 
 export default function App() {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [selectedFormulaId, setSelectedFormulaId] = useState<number | null>(
     null,
   );
@@ -62,9 +62,6 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    if (isLoading) document.body.classList.add("loading");
-    else document.body.classList.remove("loading");
-
     let lastWidth = window.innerWidth;
     const handleResize = () => {
       if (window.innerWidth !== lastWidth) {
@@ -75,7 +72,6 @@ export default function App() {
     window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);
-      document.body.classList.remove("loading");
     };
   }, [isLoading]);
 
