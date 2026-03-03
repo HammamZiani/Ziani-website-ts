@@ -19,7 +19,7 @@ export default function BookingStep1({ selectedFormula, setSelectedFormula, onNe
       <div className="grid gap-3 max-h-[40vh] lg:max-h-[350px] overflow-y-auto pr-2 custom-scrollbar">
         {formulesData.map((pkg) => (
           <button key={pkg.id} onClick={() => setSelectedFormula(pkg)}
-            className={cn("flex items-center justify-between p-5 border transition-all duration-300", selectedFormula?.id === pkg.id ? "border-black bg-black text-white" : "border-black/10 bg-transparent hover:border-black")}>
+            className={cn("flex items-center justify-between p-5 border transition-all duration-300 cursor-pointer", selectedFormula?.id === pkg.id ? "border-black bg-black text-white" : "border-black/10 bg-transparent hover:border-black")}>
             <span className="text-[10px] uppercase tracking-widest font-bold text-left">{pkg.name[currentLocale]}</span>
             <span className="font-primary text-md lg:text-lg">{pkg.price} MAD</span>
           </button>

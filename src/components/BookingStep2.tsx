@@ -110,7 +110,7 @@ export default function BookingStep2({
       <div className="flex items-center justify-between gap-10 pt-6 border-t border-black/5">
         <button
           onClick={onBack}
-          className="text-[10px] uppercase tracking-widest opacity-40 hover:opacity-100 transition-opacity"
+          className="text-[10px] uppercase tracking-widest opacity-40 hover:opacity-100 transition-opacity cursor-pointer"
         >
           {t("Booking.back")}
         </button>

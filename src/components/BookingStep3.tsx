@@ -72,7 +72,7 @@ export default function BookingStep3({ form, setForm, hasChildren, setHasChildre
       <FloatingInput label={t("Booking.messageNote")} value={form.message} onChange={(e: any) => setForm({ ...form, message: e.target.value })} />
       <div className="space-y-4 pt-8 border-t border-black/5">
         <div className="flex items-center justify-between">
-          <button onClick={onBack} className="text-[10px] uppercase tracking-widest opacity-40 hover:opacity-100">{t("Booking.back")}</button>
+          <button onClick={onBack} className="text-[10px] uppercase tracking-widest opacity-40 hover:opacity-100 cursor-pointer">{t("Booking.back")}</button>
           <span className="text-[8px] uppercase tracking-[0.2em] text-black/30 font-bold">Choose your channel</span>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
