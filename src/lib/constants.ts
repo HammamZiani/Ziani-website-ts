@@ -65,7 +65,7 @@ export const servicesData = [
   },
   {
     id: 6,
-    image: "/masqueCorp.jpeg",
+    image: "/mask3.jpeg",
     name: { fr: "Masques corporels", en: "Body Masks" },
     description: {
       fr: "Choisissez parmi notre large gamme de masques, comprenant des options exquises telles que café à l'orange, oud, fleur d'oranger, et bien plus encore. Chacun de nos masques est soigneusement élaboré pour revitaliser votre peau, la laissant nourrie, éclatante et délicatement parfumée.",
