@@ -137,7 +137,7 @@ function PackageCard({
           style={{ backgroundColor: pkg.color }}
         />
         <span className="block font-primary text-3xl tracking-widest text-white sm:text-4xl">
-          {pkg.price}
+          {pkg.price} DH
         </span>
       </div>
       <div className="relative z-10 grow">
