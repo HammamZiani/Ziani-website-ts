@@ -101,30 +101,6 @@ export const formulesData = [
   },
   {
     id: 3,
-    color: "#92400e",
-    name: { fr: "Package Chocolat", en: "Chocolate Package" },
-    descriptions: {
-      fr: [
-        "Entrée + Gommage",
-        "Savonnage",
-        "30 minutes de massage relaxant",
-        "Enveloppement au chocolat",
-        "Sortie de bain",
-        "Nécessaire de toilette",
-      ],
-      en: [
-        "Entry + Exfoliation",
-        "Soaping",
-        "30 minutes relaxing massage",
-        "Chocolate wrap",
-        "Bath exit",
-        "Toiletries",
-      ],
-    },
-    price: 400,
-  },
-  {
-    id: 1,
     color: "#ca8a04",
     name: { fr: "Package Premium", en: "Premium Package" },
     descriptions: {
@@ -149,6 +125,30 @@ export const formulesData = [
     },
     price: 500,
     isPopular: true,
+  },
+  {
+    id: 1,
+    color: "#92400e",
+    name: { fr: "Package Chocolat", en: "Chocolate Package" },
+    descriptions: {
+      fr: [
+        "Entrée + Gommage",
+        "Savonnage",
+        "30 minutes de massage relaxant",
+        "Enveloppement au chocolat",
+        "Sortie de bain",
+        "Nécessaire de toilette",
+      ],
+      en: [
+        "Entry + Exfoliation",
+        "Soaping",
+        "30 minutes relaxing massage",
+        "Chocolate wrap",
+        "Bath exit",
+        "Toiletries",
+      ],
+    },
+    price: 400,
   },
 ] as any;
 

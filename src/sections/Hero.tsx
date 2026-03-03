@@ -10,7 +10,7 @@ interface HeroProps {
 }
 
 export function Hero({ isLoaded }: HeroProps) {
-  const { t } = useI18n();
+  const { locale, t } = useI18n();
 
   const navItems = [
     { key: "Navigation.home", id: "home" },
@@ -75,14 +75,13 @@ export function Hero({ isLoaded }: HeroProps) {
           </div>
 
           <div className="flex items-center justify-center lg:col-start-2 lg:row-span-2 lg:justify-end">
-            <div className="relative aspect-4/5 w-full max-w-90 sm:max-w-120 md:max-w-137.5 lg:max-w-none lg:w-[92%] xl:w-[88%]">
-              <div className="relative h-full w-full overflow-hidden shadow-[0_50px_120px_rgba(0,0,0,0.85)]">
+            <div className="relative aspect-4/5 w-full max-w-90 sm:max-w-120 md:max-w-137.5 lg:max-w-none lg:w-[92%] xl:w-[88%] hero-image">
+              <div className="relative h-full w-full overflow-hidden ">
                 <img
                   src={Images.Hero_Right}
                   alt="Hammam Ziani"
                   className="h-full w-full object-cover transition-all duration-[3s] ease-out hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-linear-to-tr from-black/40 via-transparent to-transparent pointer-events-none" />
               </div>
             </div>
           </div>
