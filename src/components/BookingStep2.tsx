@@ -3,7 +3,7 @@ import { useI18n } from "@/providers/I18nProvider";
 import { Button } from "@/components/Button";
 import { cn } from "@/lib/utils";
 
-const TIME_SLOTS = Array.from({ length: 31 }, (_, i) => {
+const TIME_SLOTS = Array.from({ length: 30 }, (_, i) => {
   const hour = Math.floor(i / 2) + 7;
   const min = (i % 2) * 30;
   return `${hour.toString().padStart(2, "0")}:${min.toString().padStart(2, "0")}`;
