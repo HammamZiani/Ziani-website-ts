@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+html {
+  font-size: clamp(12px, calc(0.5vw + 0.5vh), 20px);
+}
+
+@font-face {
+  font-family: "PrimaryFont";
+  src: url("@/assets/fonts/Alkatra-VariableFont_wght.woff") format("woff");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SecondaryFont";
+  src: url("@/assets/fonts/font3.woff2") format("woff2");
+  font-display: swap;
+}
+
+@theme {
+  --font-primary: "PrimaryFont", sans-serif;
+  --font-secondary: "SecondaryFont", sans-serif;
+  --color-brand-yellow: oklch(80.73% 0.169 78.78);
+}
+
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --brand-yellow: oklch(80.73% 0.169 78.78);
+}
+
+@layer base {
+  * {
+    border-color: oklch(0.922 0 0);
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+  }
+}
+
+body.loading {
+  overflow: hidden;
+  height: 100vh;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: oklch(0.7 0 0);
+  border-radius: 4px;
+}
+
+.date-input-field::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  opacity: 0.5;
+  cursor: pointer;
+}

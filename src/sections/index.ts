@@ -1,0 +1,8 @@
+export { Hero } from "./Hero"
+export { About } from "./About"
+export { Speciality } from "./Speciality"
+export { Services } from "./Services"
+export { Formules } from "./Formules"
+export { BeautyCenter } from "./BeautyCenter"
+export { Gallery } from "./Gallery"
+export { Booking } from "./Booking"
