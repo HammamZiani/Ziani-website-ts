@@ -135,7 +135,7 @@ export default function BookingStep3({ form, setForm, hasChildren, setHasChildre
       <div className="space-y-4 pt-8 border-t border-black/5">
         <div className="flex items-center justify-between">
           <button onClick={onBack} className="text-[10px] uppercase tracking-widest opacity-40 hover:opacity-100 cursor-pointer">{t("Booking.back")}</button>
-          {!isFormValid && <span className="text-[8px] uppercase text-red-500/60 font-bold">Required fields missing</span>}
+          {!isFormValid && <span className="text-[8px] uppercase text-red-500/60 font-bold">{t("Booking.req")}</span>}
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Button variant="solid" disabled={!isFormValid} onClick={handleWhatsApp}>WhatsApp</Button>
