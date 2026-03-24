@@ -76,17 +76,7 @@ export function Gallery() {
           </div>
         </div>
 
-        <div className="gallery-bottom-ui relative z-10 px-6 md:px-12 lg:px-20 mt-12 flex items-center justify-between">
-          <div className="flex items-center gap-6">
-            <span className="text-white/20 text-[0.6rem] tracking-[0.5em] uppercase">
-              {t("Gallery.scroll")}
-            </span>
-            <div className="flex gap-1">
-              <div className="w-1 h-1 rounded-full bg-[#1e3a8a] animate-pulse" />
-              <div className="w-1 h-1 rounded-full bg-[#C6A75E]" />
-              <div className="w-1 h-1 rounded-full bg-[#1e3a8a] animate-pulse" />
-            </div>
-          </div>
+        <div className="gallery-bottom-ui relative z-10 px-6 md:px-12 lg:px-20 mt-12 flex items-center justify-end">
           <div className="text-brand-yellow font-primary italic text-xl">
             {t("Gallery.heritage")}
           </div>

@@ -77,7 +77,7 @@ export default function App() {
 
   return (
     <>
-      {isLoading && <Loader onComplete={() => setIsLoading(false)} />}
+      {isLoading && <Loader  onComplete={() => setIsLoading(false)} />}
       <main className="select-none relative">
         <TopBar onLanguageChange={reloadLoader} />
         <Suspense fallback={<div className="min-h-screen" />}>

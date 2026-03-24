@@ -56,7 +56,7 @@ export default function BookingStep3({ form, setForm, hasChildren, setHasChildre
           </select>
         </div>
         <div className="flex flex-col justify-center">
-          <button onClick={() => setHasChildren(!hasChildren)} className="flex items-center gap-3 group w-fit">
+          <button onClick={() => setHasChildren(!hasChildren)} className="flex items-center gap-3 group w-fit cursor-pointer">
             <div className={cn("w-8 h-4 rounded-full relative transition-colors", hasChildren ? "bg-black" : "bg-black/10")}>
               <div className={cn("absolute top-1 w-2 h-2 rounded-full bg-[#E5E5DD] transition-all", hasChildren ? "left-5" : "left-1")} />
             </div>

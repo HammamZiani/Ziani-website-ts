@@ -1,12 +1,13 @@
 export const Images = {
   Booking_Left: "/bath4.jpeg",
   Hero_Right: "/gallery/img11.jpeg",
+  Hero_Right2: "/ii.png",
   Hero_Bg: "/hero-bg.jpg",
   Speciality: "/speciality.jpg",
   Salon: "/salon1.jpeg",
 } as const;
 
-export const galleryImages = Array.from({ length: 12 }, (_, i) => ({
+export const galleryImages = Array.from({ length: 15 }, (_, i) => ({
   id: i + 1,
   src: `/gallery/img${i + 1}.jpeg`,
 }));
@@ -178,3 +179,8 @@ export const bathsData = [
     num: "04",
   },
 ] as any;
+
+export const allAppImages = [
+  ...Object.values(Images),
+  ...galleryImages.map((img) => img.src),
+];

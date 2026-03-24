@@ -9,7 +9,6 @@ const TIME_SLOTS = Array.from({ length: 30 }, (_, i) => {
   return `${hour.toString().padStart(2, "0")}:${min.toString().padStart(2, "0")}`;
 });
 
-
 interface Step2Props {
   form: any;
   setForm: (f: any) => void;
