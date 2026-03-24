@@ -75,7 +75,7 @@ export function Hero({ isLoaded }: HeroProps) {
           </div>
 
           <div className="flex items-center justify-center lg:col-start-2 lg:row-span-2 lg:justify-end">
-            <div className="relative aspect-3/5 md:aspect-4/5 w-full max-w-90 sm:max-w-120 md:max-w-137.5 lg:max-w-none lg:w-[92%] xl:w-[88%] hero-image">
+            <div className="relative  md:aspect-4/5 md:w-full  md:max-w-137.5 lg:max-w-none lg:w-[92%] xl:w-[88%] hero-image">
               <div className="relative h-full w-full overflow-hidden ">
                 <img
                   src={Images.Hero_Right2}
