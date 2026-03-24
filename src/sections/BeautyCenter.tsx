@@ -56,7 +56,7 @@ export function BeautyCenter() {
               smallClass="text-[0.65rem] uppercase tracking-[0.3em] text-black/40"
             />
             <div className="max-w-lg space-y-6">
-              <p className="beauty-ui-fade text-sm leading-relaxed tracking-wide text-[#1a1a1a]/70 md:text-base">
+              <p className="beauty-ui-fade text-sm leading-relaxed tracking-wide text-[#1a1a1a]/70 md:text-base uppercase">
                 {t("Beauty.description")}
               </p>
               <div className="beauty-ui-fade flex flex-wrap gap-x-4 gap-y-2">
