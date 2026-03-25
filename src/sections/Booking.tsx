@@ -44,9 +44,9 @@ export function Booking({ isLoaded, selectedFormulaId }: BookingProps) {
     name: "",
     phone: "+212",
     date: "",
-    persons: "2",
-    childrenCount: "1",
-    gender: "", // Starts empty for requirement
+    men: 0, // New
+    women: 0, // New
+    children: 0, // New
     message: "",
   });
 
@@ -61,11 +61,19 @@ export function Booking({ isLoaded, selectedFormulaId }: BookingProps) {
   }, [selectedFormulaId]);
 
   return (
-    <section id="booking" className="relative z-30 min-h-screen bg-[#E5E5DD] overflow-hidden">
+    <section
+      id="booking"
+      className="relative z-30 min-h-screen bg-[#E5E5DD] overflow-hidden"
+    >
       <div className="absolute inset-0 pointer-events-none hidden sm:block">
         <div className="absolute border border-black inset-0 h-full w-full p-10 -z-10">
           <div className="h-full w-full border border-black relative">
-            {["-top-4 -left-4", "-top-4 -right-4", "-bottom-4 -left-4", "-bottom-4 -right-4"].map((pos) => (
+            {[
+              "-top-4 -left-4",
+              "-top-4 -right-4",
+              "-bottom-4 -left-4",
+              "-bottom-4 -right-4",
+            ].map((pos) => (
               <div key={pos} className={`absolute size-4 bg-black ${pos}`} />
             ))}
           </div>
@@ -74,13 +82,24 @@ export function Booking({ isLoaded, selectedFormulaId }: BookingProps) {
 
       <div className="grid lg:grid-cols-[0.7fr_1.3fr] min-h-screen">
         <div className="relative h-[25vh] lg:h-full overflow-hidden">
-          <img src={Images.Booking_Left} alt="Hammam" className="absolute inset-0 w-full h-full object-cover" />
+          <img
+            src={Images.Booking_Left}
+            alt="Hammam"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
           <div className="absolute inset-0 bg-black/40" />
           <div className="absolute bottom-4 left-6 lg:bottom-16 lg:left-12 z-10 text-white">
             <h2 className="text-2xl lg:text-6xl font-primary uppercase leading-tight">
-              <AnimatedText text={t("Booking.reserve")} wordClass="booking-reveal-word" />
+              <AnimatedText
+                text={t("Booking.reserve")}
+                wordClass="booking-reveal-word"
+              />
               <br className="hidden lg:block" />
-              <AnimatedText text={t("Booking.moment")} wordClass="booking-reveal-word" className="italic font-light text-brand-yellow/90 lg:normal-case" />
+              <AnimatedText
+                text={t("Booking.moment")}
+                wordClass="booking-reveal-word"
+                className="italic font-light text-brand-yellow/90 lg:normal-case"
+              />
             </h2>
           </div>
         </div>
@@ -89,13 +108,32 @@ export function Booking({ isLoaded, selectedFormulaId }: BookingProps) {
           <div className="max-w-2xl w-full mx-auto">
             <StepIndicator step={step} />
             {step === 1 && (
-              <BookingStep1 selectedFormula={selectedFormula} setSelectedFormula={setSelectedFormula} onNext={() => setStep(2)} />
+              <BookingStep1
+                selectedFormula={selectedFormula}
+                setSelectedFormula={setSelectedFormula}
+                onNext={() => setStep(2)}
+              />
             )}
             {step === 2 && (
-              <BookingStep2 form={form} setForm={setForm} selectedTime={selectedTime} setSelectedTime={setSelectedTime} onNext={() => setStep(3)} onBack={() => setStep(1)} />
+              <BookingStep2
+                form={form}
+                setForm={setForm}
+                selectedTime={selectedTime}
+                setSelectedTime={setSelectedTime}
+                onNext={() => setStep(3)}
+                onBack={() => setStep(1)}
+              />
             )}
             {step === 3 && (
-              <BookingStep3 form={form} setForm={setForm} hasChildren={hasChildren} setHasChildren={setHasChildren} selectedFormula={selectedFormula} selectedTime={selectedTime} onBack={() => setStep(2)} />
+              <BookingStep3
+                form={form}
+                setForm={setForm}
+                hasChildren={hasChildren}
+                setHasChildren={setHasChildren}
+                selectedFormula={selectedFormula}
+                selectedTime={selectedTime}
+                onBack={() => setStep(2)}
+              />
             )}
           </div>
         </div>
