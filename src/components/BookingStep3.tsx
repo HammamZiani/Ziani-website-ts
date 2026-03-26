@@ -74,26 +74,36 @@ export default function BookingStep3({
     form.phone.trim().length >= 9 &&
     totalPersons > 0;
 
-  const getBookingDetails = () => {
+const getBookingDetails = () => {
     const details = [];
-    if (form.men > 0) details.push(`👨 ${form.men} ${t("Booking.typeMan")}`);
-    if (form.women > 0)
-      details.push(`👩 ${form.women} ${t("Booking.typeWoman")}`);
-    if (form.children > 0)
-      details.push(`👶 ${form.children} ${t("Booking.children")}`);
+    if (form.men > 0) details.push("👨 " + form.men + " " + t("Booking.typeMan"));
+    if (form.women > 0) details.push("👩 " + form.women + " " + t("Booking.typeWoman"));
+    if (form.children > 0) details.push("👶 " + form.children + " " + t("Booking.children"));
+
+    const messageBody = [
+      "✨ " + t("Booking.title").toUpperCase() + " ✨",
+      "",
+      "🌿 Rituel: " + (selectedFormula?.name[currentLocale] || ""),
+      "👤 " + t("Booking.name") + ": " + form.name,
+      "📞 " + t("Booking.phone") + ": " + form.phone,
+      "📅 " + t("Booking.date") + ": " + form.date,
+      "⏰ Heure: " + selectedTime,
+      "👥 Total: " + totalPersons + " Pers.",
+      details.join("\n"),
+      "📝 Note: " + (form.message || "---")
+    ].join("\n");
 
     return {
-      text: `✨ ${t("Booking.title").toUpperCase()} ✨\n\n🌿 Rituel: ${selectedFormula?.name[currentLocale]}\n👤 ${t("Booking.name")}: ${form.name}\n📞 ${t("Booking.phone")}: ${form.phone}\n📅 ${t("Booking.date")}: ${form.date}\n⏰ Heure: ${selectedTime}\n👥 Total: ${totalPersons} Pers.\n${details.join("\n")}\n📝 Note: ${form.message || "---"}`,
-      subject: `Booking: ${form.name}`,
+      text: messageBody,
+      subject: "Booking: " + form.name,
     };
   };
 
-  const handleWhatsApp = () => {
+const handleWhatsApp = () => {
     const { text } = getBookingDetails();
-    window.open(
-      `https://wa.me/212661325840?text=${encodeURIComponent(text)}`,
-      "_blank",
-    );
+    // Using api.whatsapp.com instead of wa.me
+    const url = `https://api.whatsapp.com/send?phone=212661325840&text=${encodeURIComponent(text)}`;
+    window.open(url, "_blank");
   };
 
   const handleEmail = () => {
