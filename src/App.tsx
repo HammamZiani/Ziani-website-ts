@@ -61,19 +61,21 @@ export default function App() {
     requestAnimationFrame(raf);
   }, []);
 
-  useEffect(() => {
-    let lastWidth = window.innerWidth;
-    const handleResize = () => {
-      if (window.innerWidth !== lastWidth) {
-        lastWidth = window.innerWidth;
-        window.location.reload();
-      }
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [isLoading]);
+ useEffect(() => {
+  const isMobile = () => window.innerWidth < 1024;
+  let lastCategory = isMobile();
+
+  const handleResize = () => {
+    const currentCategory = isMobile();
+    if (currentCategory !== lastCategory) {
+      lastCategory = currentCategory;
+      window.location.reload();
+    }
+  };
+
+  window.addEventListener("resize", handleResize);
+  return () => window.removeEventListener("resize", handleResize);
+}, [isLoading]);
 
   return (
     <>

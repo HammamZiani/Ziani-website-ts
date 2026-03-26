@@ -38,13 +38,7 @@ function Counter({ label, value, onChange, min = 0 }: CounterProps) {
   );
 }
 
-function FloatingInput({
-  label,
-  value,
-  onChange,
-  type = "text",
-  inputMode,
-}: any) {
+function FloatingInput({ label, value, onChange, type = "text" }: any) {
   return (
     <div className="group relative border-b border-black/10 focus-within:border-black transition-colors">
       <label className="text-[9px] uppercase tracking-widest text-black/40 block mb-1">
@@ -53,7 +47,6 @@ function FloatingInput({
       <input
         type={type}
         value={value}
-        inputMode={inputMode}
         onChange={onChange}
         className="w-full bg-transparent outline-none text-xs py-2"
       />
@@ -125,8 +118,7 @@ export default function BookingStep3({
           <FloatingInput
             label={t("Booking.phone")}
             value={form.phone}
-            type="text"
-            inputMode="tel"
+            type="tel"
             onChange={(e: any) => setForm({ ...form, phone: e.target.value })}
           />
           <FloatingInput

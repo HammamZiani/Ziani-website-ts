@@ -44,9 +44,9 @@ export function Booking({ isLoaded, selectedFormulaId }: BookingProps) {
     name: "",
     phone: "+212",
     date: "",
-    men: 0,
-    women: 0,
-    children: 0,
+    men: 0, // New
+    women: 0, // New
+    children: 0, // New
     message: "",
   });
 
