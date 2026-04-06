@@ -1,6 +1,5 @@
 import { useI18n } from "@/providers/I18nProvider";
 import { Button } from "@/components/Button";
-import { cn } from "@/lib/utils";
 import { Minus, Plus } from "lucide-react";
 
 interface CounterProps {
@@ -38,7 +37,19 @@ function Counter({ label, value, onChange, min = 0 }: CounterProps) {
   );
 }
 
-function FloatingInput({ label, value, onChange, type = "text" }: any) {
+/**
+ * FIXED: FloatingInput
+ * 1. Added 'text-[16px]' to prevent iOS auto-zoom.
+ * 2. Added 'sm:text-xs' for desktop to keep your original design.
+ * 3. Added 'inputMode' support for better mobile keyboards.
+ */
+function FloatingInput({
+  label,
+  value,
+  onChange,
+  type = "text",
+  inputMode,
+}: any) {
   return (
     <div className="group relative border-b border-black/10 focus-within:border-black transition-colors">
       <label className="text-[9px] uppercase tracking-widest text-black/40 block mb-1">
@@ -48,7 +59,11 @@ function FloatingInput({ label, value, onChange, type = "text" }: any) {
         type={type}
         value={value}
         onChange={onChange}
-        className="w-full bg-transparent outline-none text-xs py-2"
+        inputMode={inputMode}
+        /* Crucial: iOS zooms if font-size < 16px. 
+           We set 16px (text-[16px]) for mobile and scale back to 12px (text-xs) on larger screens.
+        */
+        className="w-full bg-transparent outline-none text-[16px] sm:text-xs py-2 placeholder:text-black/20"
       />
     </div>
   );
@@ -64,21 +79,22 @@ export default function BookingStep3({
   const { t, locale } = useI18n();
   const currentLocale = (locale as "fr" | "en") || "fr";
 
-  // 1. Calculate totals
   const totalPersons =
     (form.men || 0) + (form.women || 0) + (form.children || 0);
 
-  // 2. Updated Validation Logic
   const isFormValid =
     form.name.trim().length >= 3 &&
     form.phone.trim().length >= 9 &&
     totalPersons > 0;
 
-const getBookingDetails = () => {
+  const getBookingDetails = () => {
     const details = [];
-    if (form.men > 0) details.push("👨 " + form.men + " " + t("Booking.typeMan"));
-    if (form.women > 0) details.push("👩 " + form.women + " " + t("Booking.typeWoman"));
-    if (form.children > 0) details.push("👶 " + form.children + " " + t("Booking.children"));
+    if (form.men > 0)
+      details.push("👨 " + form.men + " " + t("Booking.typeMan"));
+    if (form.women > 0)
+      details.push("👩 " + form.women + " " + t("Booking.typeWoman"));
+    if (form.children > 0)
+      details.push("👶 " + form.children + " " + t("Booking.children"));
 
     const messageBody = [
       "✨ " + t("Booking.title").toUpperCase() + " ✨",
@@ -90,18 +106,14 @@ const getBookingDetails = () => {
       "⏰ Heure: " + selectedTime,
       "👥 Total: " + totalPersons + " Pers.",
       details.join("\n"),
-      "📝 Note: " + (form.message || "---")
+      "📝 Note: " + (form.message || "---"),
     ].join("\n");
 
-    return {
-      text: messageBody,
-      subject: "Booking: " + form.name,
-    };
+    return { text: messageBody, subject: "Booking: " + form.name };
   };
 
-const handleWhatsApp = () => {
+  const handleWhatsApp = () => {
     const { text } = getBookingDetails();
-    // Using api.whatsapp.com instead of wa.me
     const url = `https://api.whatsapp.com/send?phone=212661325840&text=${encodeURIComponent(text)}`;
     window.open(url, "_blank");
   };
@@ -118,7 +130,6 @@ const handleWhatsApp = () => {
       </h4>
 
       <div className="grid lg:grid-cols-2 gap-x-12 gap-y-10">
-        {/* Left Side: Inputs */}
         <div className="space-y-6">
           <FloatingInput
             label={t("Booking.fullName")}
@@ -129,6 +140,7 @@ const handleWhatsApp = () => {
             label={t("Booking.phone")}
             value={form.phone}
             type="tel"
+            inputMode="tel" // Opens numeric keypad on iPhone
             onChange={(e: any) => setForm({ ...form, phone: e.target.value })}
           />
           <FloatingInput
@@ -138,7 +150,6 @@ const handleWhatsApp = () => {
           />
         </div>
 
-        {/* Right Side: Counters */}
         <div className="flex flex-col bg-black/5 p-6 rounded-sm">
           <label className="text-[9px] uppercase tracking-[0.2em] text-black/40 mb-4 font-bold">
             {t("Booking.adults")} & {t("Booking.children")}
