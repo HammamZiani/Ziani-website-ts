@@ -1,9 +1,10 @@
-import { useState, Suspense, lazy, useEffect } from "react";
+import { useState, Suspense, lazy, useEffect, useMemo } from "react";
 import { TopBar } from "@/components/TopBar";
 import Loader from "./components/Loader";
 import Lenis from "lenis";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
+import { Images } from "@/lib/constants";
 
 const Hero = lazy(() =>
   import("@/sections/Hero").then((m) => ({ default: m.Hero })),
@@ -55,31 +56,39 @@ export default function App() {
     null,
   );
 
+  // Extract all the image URL values from your library constants
+  const imageAssetUrls = useMemo(() => Object.values(Images), []);
+
   const reloadLoader = () => setIsLoading(true);
 
   useEffect(() => {
     requestAnimationFrame(raf);
   }, []);
 
- useEffect(() => {
-  const isMobile = () => window.innerWidth < 1024;
-  let lastCategory = isMobile();
+  useEffect(() => {
+    const isMobile = () => window.innerWidth < 1024;
+    let lastCategory = isMobile();
 
-  const handleResize = () => {
-    const currentCategory = isMobile();
-    if (currentCategory !== lastCategory) {
-      lastCategory = currentCategory;
-      window.location.reload();
-    }
-  };
+    const handleResize = () => {
+      const currentCategory = isMobile();
+      if (currentCategory !== lastCategory) {
+        lastCategory = currentCategory;
+        window.location.reload();
+      }
+    };
 
-  window.addEventListener("resize", handleResize);
-  return () => window.removeEventListener("resize", handleResize);
-}, [isLoading]);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [isLoading]);
 
   return (
     <>
-      {isLoading && <Loader  onComplete={() => setIsLoading(false)} />}
+      {isLoading && (
+        <Loader
+          imageUrls={imageAssetUrls}
+          onComplete={() => setIsLoading(false)}
+        />
+      )}
       <main className="select-none relative">
         <TopBar onLanguageChange={reloadLoader} />
         <Suspense fallback={<div className="min-h-screen" />}>

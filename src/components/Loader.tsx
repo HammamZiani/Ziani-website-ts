@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import Logo from "@/assets/images/logo.webp";
@@ -6,86 +6,127 @@ import Logo from "@/assets/images/logo.webp";
 gsap.registerPlugin(useGSAP);
 
 interface LoaderProps {
+  imageUrls: string[];
   onComplete: () => void;
 }
 
-export default function Loader({ onComplete }: LoaderProps) {
+export default function Loader({ imageUrls, onComplete }: LoaderProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const counterRef = useRef<HTMLSpanElement | null>(null);
   const panelsRef = useRef<HTMLDivElement[]>([]);
   const uiItemsRef = useRef<HTMLDivElement[]>([]);
 
+  const [realProgress, setRealProgress] = useState(0);
+  const progressTweenRef = useRef<gsap.core.Tween | null>(null);
+
+  // Handle the Image Preloading Logic
+  useEffect(() => {
+    const allAssets = [Logo, ...imageUrls].filter(Boolean);
+    if (allAssets.length === 0) {
+      setRealProgress(100);
+      return;
+    }
+
+    let loadedCount = 0;
+
+    allAssets.forEach((url) => {
+      const img = new Image();
+      img.src = url;
+
+      const handleImageLoad = () => {
+        loadedCount++;
+        const percentage = Math.floor((loadedCount / allAssets.length) * 100);
+        setRealProgress(percentage);
+      };
+
+      img.onload = handleImageLoad;
+      img.onerror = handleImageLoad; 
+    });
+  }, [imageUrls]);
+
+  // Handle GSAP Intro and Progress Animations
   useGSAP(
     () => {
-      if (!counterRef.current) return;
-
-      // Lock scrolling
       document.body.style.overflow = "hidden";
       document.documentElement.style.overflow = "hidden";
 
-      const progressObj = { value: 0 };
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+      const uiTimeline = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-      // 1. Fade in Logo and Counter
-      tl.from(uiItemsRef.current, {
+      uiTimeline.from(uiItemsRef.current, {
         y: 32,
         opacity: 0,
         stagger: 0.1,
         duration: 0.8,
       });
 
-      // 2. Animate the Percentage
-      tl.to(progressObj, {
-        value: 100,
-        duration: 2.2,
-        ease: "none",
+      const counterVal = { current: 0 };
+
+      progressTweenRef.current = gsap.to(counterVal, {
+        current: realProgress,
+        duration: 0.5,
+        ease: "power1.out",
+        paused: true,
         onUpdate: () => {
           if (counterRef.current) {
-            counterRef.current.textContent = `${Math.floor(progressObj.value)}%`;
+            counterRef.current.textContent = `${Math.floor(counterVal.current)}%`;
+          }
+        },
+        onComplete: () => {
+          // FIX: Check the GSAP object value, not the React state, to avoid stale closures
+          if (Math.round(counterVal.current) >= 100) {
+            triggerExitSequence();
           }
         },
       });
-
-      // 3. Exit the UI items upwards
-      tl.to(
-        uiItemsRef.current,
-        {
-          y: -40,
-          opacity: 0,
-          stagger: 0.05,
-          duration: 0.5,
-          ease: "power2.in",
-        },
-        "+=0.2",
-      );
-
-      // 4. THE STAIRS ANIMATION (The Reveal)
-      tl.to(
-        panelsRef.current,
-        {
-          scaleY: 0,
-          transformOrigin: "top", // Change to "bottom" if you want them to slide up
-          stagger: 0.1,
-          duration: 1,
-          ease: "expo.inOut",
-          onComplete: () => {
-            document.body.style.overflow = "auto";
-            document.documentElement.style.overflow = "auto";
-            onComplete();
-          },
-        },
-        "-=0.3",
-      );
     },
-    { scope: containerRef },
+    { scope: containerRef }
   );
+
+  useEffect(() => {
+    if (progressTweenRef.current) {
+      progressTweenRef.current.invalidate().vars.current = realProgress;
+      progressTweenRef.current.restart();
+    }
+  }, [realProgress]);
+
+  const triggerExitSequence = () => {
+    const exitTl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+    exitTl.to(
+      uiItemsRef.current,
+      {
+        y: -40,
+        opacity: 0,
+        stagger: 0.05,
+        duration: 0.5,
+        ease: "power2.in",
+      },
+      "+=0.2"
+    );
+
+    exitTl.to(
+      panelsRef.current,
+      {
+        scaleY: 0,
+        transformOrigin: "top",
+        stagger: 0.1,
+        duration: 1,
+        ease: "expo.inOut",
+        onComplete: () => {
+          document.body.style.overflow = "auto";
+          document.documentElement.style.overflow = "auto";
+          onComplete();
+        },
+      },
+      "-=0.3"
+    );
+  };
 
   return (
     <div
       ref={containerRef}
       className="fixed inset-0 z-[9999] h-[100dvh] w-screen overflow-hidden select-none touch-none"
     >
-      {/* Background Panels (The Stairs) */}
       <div className="absolute inset-0 flex w-full h-full pointer-events-none">
         {Array.from({ length: 5 }).map((_, i) => (
           <div
@@ -98,7 +139,6 @@ export default function Loader({ onComplete }: LoaderProps) {
         ))}
       </div>
 
-      {/* Content Layer */}
       <div className="relative z-10 flex h-full w-full flex-col items-center justify-center text-white">
         <div
           ref={(el) => {
@@ -137,7 +177,6 @@ export default function Loader({ onComplete }: LoaderProps) {
           </div>
         </div>
 
-        {/* Bottom Metadata */}
         <div
           ref={(el) => {
             if (el) uiItemsRef.current[2] = el;
