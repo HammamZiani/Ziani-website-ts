@@ -11,7 +11,6 @@ import BookingStep3 from "@/components/BookingStep3";
 gsap.registerPlugin(ScrollTrigger);
 
 interface BookingProps {
-  isLoaded: boolean;
   selectedFormulaId?: number | null;
 }
 
@@ -21,7 +20,7 @@ function StepIndicator({ step }: { step: number }) {
       <span className="text-[10px] font-bold tracking-widest">
         {step.toString().padStart(2, "0")} / 03
       </span>
-      <div className="h-[1px] flex-1 bg-black/10 relative">
+      <div className="h-px flex-1 bg-black/10 relative">
         <div
           className="absolute left-0 h-full bg-black transition-all duration-500"
           style={{ width: `${(step / 3) * 100}%` }}
@@ -31,7 +30,7 @@ function StepIndicator({ step }: { step: number }) {
   );
 }
 
-export function Booking({ isLoaded, selectedFormulaId }: BookingProps) {
+export function Booking({ selectedFormulaId }: BookingProps) {
   const { t } = useI18n();
 
   const [step, setStep] = useState(1);

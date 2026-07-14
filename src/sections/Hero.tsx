@@ -30,7 +30,7 @@ export function Hero({ isLoaded }: HeroProps) {
         className="relative flex min-h-screen w-full flex-col overflow-hidden"
       >
         <header className="absolute top-6 left-1/2 z-50 w-full max-w-400 -translate-x-1/2 px-6 lg:top-10 lg:px-12">
-          <div className="text-center">
+          <div className="text-center mb-4">
             <img src="/logo.webp" alt="Logo" className="mx-auto h-24" />
           </div>
           <nav className="mt-6 hidden lg:block">

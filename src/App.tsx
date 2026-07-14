@@ -104,10 +104,7 @@ export default function App() {
           />
           <BeautyCenter />
           <Gallery />
-          <Booking
-            isLoaded={!isLoading}
-            selectedFormulaId={selectedFormulaId}
-          />
+          <Booking selectedFormulaId={selectedFormulaId} />
         </Suspense>
       </main>
     </>
